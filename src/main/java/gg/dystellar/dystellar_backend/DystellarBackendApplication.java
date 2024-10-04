@@ -1,0 +1,13 @@
+package gg.dystellar.dystellar_backend;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class DystellarBackendApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(DystellarBackendApplication.class, args);
+	}
+
+}
