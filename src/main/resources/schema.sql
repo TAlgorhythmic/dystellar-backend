@@ -1,0 +1,46 @@
+CREATE TABLE IF NOT EXISTS players
+(
+    uuid CHAR(36) NOT NULL,
+    chat BOOLEAN NOT NULL,
+    messages INTEGER NOT NULL DEFAULT 1,
+    suffix VARCHAR(15) NOT NULL,
+    punishments VARCHAR(1000),
+    notes VARCHAR(1000),
+    lang VARCHAR(4) NOT NULL,
+    inbox VARCHAR(3000),
+    version INTEGER NOT NULL DEFAULT 0,
+    tabcompletion BOOLEAN NOT NULL DEFAULT FALSE,
+    scoreboard BOOLEAN NOT NULL DEFAULT TRUE,
+    ignoreList VARCHAR(4000) NOT NULL,
+    friends VARCHAR(2000),
+    otherConfigs VARCHAR(4000),
+    tips VARCHAR(50) NOT NULL,
+    PRIMARY KEY (uuid)
+);
+CREATE TABLE IF NOT EXISTS registered_ips
+(
+   id INTEGER NOT NULL AUTO_INCREMENT,
+   uuid CHAR(36) NOT NULL,
+   ip VARCHAR(15) NOT NULL,
+   PRIMARY KEY (id)
+);
+CREATE TABLE IF NOT EXISTS punishments
+(
+   id INTEGER NOT NULL AUTO_INCREMENT,
+   uuid CHAR(36) NOT NULL,
+   ip VARCHAR(15) NOT NULL,
+   isAlsoIp BOOLEAN NOT NULL,
+   creationDate TIMESTAMP NOT NULL,
+   expirationDate DATETIME,
+   reason VARCHAR(100) NOT NULL,
+   type TINYINT NOT NULL,
+   FOREIGN KEY (uuid) REFERENCES players(uuid),
+   FOREIGN KEY (ip) REFERENCES registered_ips(ip),
+   PRIMARY KEY (id)
+);
+CREATE TABLE IF NOT EXISTS senders
+(
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    serialized VARCHAR(4000) NOT NULL,
+    PRIMARY KEY (id)
+);
